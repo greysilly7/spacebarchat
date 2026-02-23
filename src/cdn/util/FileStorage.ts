@@ -34,7 +34,7 @@ export class FileStorage implements Storage {
         return filename;
     }
     isFile(path: string): Promise<boolean> {
-        return Promise.resolve(fs.statSync(path).isFile());
+        return Promise.resolve(fs.statSync(this.getFsPath(path)).isFile());
     }
 
     async get(path: string): Promise<Buffer | null> {
