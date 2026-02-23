@@ -77,10 +77,10 @@ router.get("/:emoji_id", cache, async (req: Request, res: Response) => {
     return res.send(file);
 });
 
-router.delete("/:emoji_id/:id", async (req: Request, res: Response) => {
+router.delete("/:emoji_id", async (req: Request, res: Response) => {
     if (req.headers.signature !== Config.get().security.requestSignature) throw new HTTPError("Invalid request signature");
-    const { emoji_id, id } = req.params as { [key: string]: string };
-    const path = `${pathPrefix}/${emoji_id}/${id}`;
+    const { emoji_id } = req.params as { [key: string]: string };
+    const path = `${pathPrefix}/${emoji_id}`;
 
     await storage.delete(path);
 
