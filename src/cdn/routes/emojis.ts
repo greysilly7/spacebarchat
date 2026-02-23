@@ -62,7 +62,7 @@ router.post("/:guild_id", multer.single("file"), async (req: Request, res: Respo
     });
 });
 
-router.get("/:guild_id", cache, async (req: Request, res: Response) => {
+router.get("/:emoji_id", cache, async (req: Request, res: Response) => {
     let { guild_id } = req.params as { [key: string]: string };
     guild_id = guild_id.split(".")[0]; // remove .file extension
     const path = `${pathPrefix}/${guild_id}`;
@@ -88,8 +88,6 @@ export const getAvatar = async (req: Request, res: Response) => {
 
     return res.send(file);
 };
-
-router.get("/:guild_id/:hash", cache, getAvatar);
 
 router.delete("/:guild_id/:id", async (req: Request, res: Response) => {
     if (req.headers.signature !== Config.get().security.requestSignature) throw new HTTPError("Invalid request signature");
