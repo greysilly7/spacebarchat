@@ -690,7 +690,7 @@ interface MessageOptions extends MessageCreateSchema {
     author_id?: string;
     webhook_id?: string;
     application_id?: string;
-    embeds?: Embed[];
+    embeds?: Embed[] | null;
     reactions?: Reaction[];
     channel_id?: string;
     attachments?: (MessageCreateAttachment | MessageCreateCloudAttachment | Attachment)[]; // why are we masking this?
