@@ -444,7 +444,7 @@ export async function handleMessage(opts: MessageOptions): Promise<Message> {
             await fillInMissingIDs((await Member.find({ where: { guild_id: channel.guild_id } })).map(({ id }) => id));
         }
         const repository = ReadState.getRepository();
-        const condition = { channel_id: channel.id, type: ReadStateType.CHANNEL };
+        const condition = { channel_id: channel.id, read_state_type: ReadStateType.CHANNEL };
         await repository.update({ ...condition, mention_count: IsNull() }, { mention_count: 0 });
         await repository.increment(condition, "mention_count", 1);
     } else {
