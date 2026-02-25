@@ -112,6 +112,7 @@ app.Map("/", async context => {
 
     foreach (var header in responseMessage.Headers) context.Response.Headers[header.Key] = header.Value.ToArray();
     foreach (var header in responseMessage.Content.Headers) context.Response.Headers[header.Key] = header.Value.ToArray();
+    context.Response.Headers["X-SB-UApi-Status"] = "MISSING";
 
     // await responseMessage.Content.CopyToAsync(context.Response.Body);
     var txt = await responseMessage.Content.ReadAsStringAsync();
