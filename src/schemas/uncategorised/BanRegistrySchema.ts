@@ -23,7 +23,7 @@ export const BanRegistrySchema = z.object({
     user_id: z.string(),
     guild_id: z.string(),
     executor_id: z.string(),
-    ip: z.string().optional(),
+    ip: z.ipv4().or(z.ipv6()).optional(),
     reason: z.string().optional(),
 });
 
