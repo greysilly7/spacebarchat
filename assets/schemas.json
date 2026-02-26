@@ -4402,7 +4402,18 @@
                 "type": "string"
             },
             "ip": {
-                "type": "string"
+                "anyOf": [
+                    {
+                        "type": "string",
+                        "format": "ipv4",
+                        "pattern": "^(?:(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\\.){3}(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])$"
+                    },
+                    {
+                        "type": "string",
+                        "format": "ipv6",
+                        "pattern": "^(([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:))$"
+                    }
+                ]
             },
             "reason": {
                 "type": "string"
@@ -15702,6 +15713,88 @@
             0,
             1,
             2
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#"
+    },
+    "ApplicationCommandCreateSchemaOption": {
+        "type": "object",
+        "properties": {
+            "type": {
+                "type": "integer"
+            },
+            "name": {
+                "type": "string"
+            },
+            "name_localizations": {
+                "type": "object"
+            },
+            "description": {
+                "type": "string"
+            },
+            "description_localizations": {
+                "type": "object"
+            },
+            "required": {
+                "type": "boolean"
+            },
+            "choices": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        },
+                        "name_localizations": {
+                            "type": "object"
+                        },
+                        "value": {
+                            "type": [
+                                "string",
+                                "integer"
+                            ]
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "name",
+                        "value"
+                    ]
+                }
+            },
+            "options": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/definitions/ApplicationCommandCreateSchemaOption"
+                }
+            },
+            "channel_types": {
+                "type": "array",
+                "items": {
+                    "type": "integer"
+                }
+            },
+            "min_value": {
+                "type": "integer"
+            },
+            "max_value": {
+                "type": "integer"
+            },
+            "min_length": {
+                "type": "integer"
+            },
+            "max_length": {
+                "type": "integer"
+            },
+            "autocomplete": {
+                "type": "boolean"
+            }
+        },
+        "additionalProperties": false,
+        "required": [
+            "description",
+            "name",
+            "type"
         ],
         "$schema": "http://json-schema.org/draft-07/schema#"
     },
