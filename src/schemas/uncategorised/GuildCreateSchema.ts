@@ -16,18 +16,18 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { ChannelCreateSchema } from "@spacebar/schemas";
+import { z } from "zod";
+import { ChannelCreateSchema } from "./ChannelCreateSchema";
 
-export interface GuildCreateSchema {
-    /**
-     * @maxLength 100
-     */
-    name?: string;
-    region?: string;
-    icon?: string | null;
-    channels?: ChannelCreateSchema[];
-    system_channel_id?: string;
-    rules_channel_id?: string;
-    guild_template_code?: string;
-    staff_only?: boolean;
-}
+export const GuildCreateSchema = z.object({
+    name: z.string().max(100).optional(),
+    region: z.string().optional(),
+    icon: z.string().nullable().optional(),
+    channels: z.array(ChannelCreateSchema).optional(),
+    system_channel_id: z.string().optional(),
+    rules_channel_id: z.string().optional(),
+    guild_template_code: z.string().optional(),
+    staff_only: z.boolean().optional(),
+});
+
+export type GuildCreateSchema = z.infer<typeof GuildCreateSchema>;

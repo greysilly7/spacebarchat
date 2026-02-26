@@ -27,7 +27,7 @@ const router = Router({ mergeParams: true });
 router.patch(
     "/",
     route({
-        requestBody: "VoiceStateUpdateSchema",
+        requestBody: VoiceStateUpdateSchema,
         responses: {
             204: {},
             400: {
